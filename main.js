@@ -1,3 +1,4 @@
+"use strict";
 /*
  * @Author: your name
  * @Date: 2020-10-19
@@ -21,22 +22,24 @@ var Canvas2DUtil = /** @class */ (function () {
         // 则下次调用其他绘图函数时，如果你没有更改颜色，则会继续使用上次设置的红色进行绘制
         // 随着程序越来越复杂，如果不使用ｓａｖｅ/restore来管理，最后整个渲染状态会及其混乱
         // 请时刻保持使用save、restore配对函数来管理渲染状态
-        this.context.save();
-        this.context.textBaseline = "middle";
-        this.context.textAlign = "center";
-        //计算canvas的中心坐标
-        var centerX = this.context.canvas.width * 0.5;
-        var centerY = this.context.canvas.height * 0.5;
-        //红色填充
-        this.context.fillStyle = "red";
-        // 调用文字填充命令
-        this.context.fillText(text, centerX, centerY);
-        // 绿色描边
-        this.context.strokeStyle = "green";
-        // 调用文字描边命令
-        this.context.strokeText(text, centerX, centerY);
-        // 将上面的ｃｏｎtext中的textAlign, textBaseLine, fillStyle,strokeStyle状态恢复到初始状态
-        this.context.restore();
+        if (this.context != null) {
+            this.context.save();
+            this.context.textBaseline = "middle";
+            this.context.textAlign = "center";
+            //计算canvas的中心坐标
+            var centerX = this.context.canvas.width * 0.5;
+            var centerY = this.context.canvas.height * 0.5;
+            //红色填充
+            this.context.fillStyle = "red";
+            // 调用文字填充命令
+            this.context.fillText(text, centerX, centerY);
+            // 绿色描边
+            this.context.strokeStyle = "green";
+            // 调用文字描边命令
+            this.context.strokeText(text, centerX, centerY);
+            // 将上面的ｃｏｎtext中的textAlign, textBaseLine, fillStyle,strokeStyle状态恢复到初始状态
+            this.context.restore();
+        }
     };
     return Canvas2DUtil;
 }());
